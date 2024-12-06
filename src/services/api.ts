@@ -70,10 +70,17 @@ export const deleteProvider = (id: number) =>
   authFetch(`/providers/${id}`, { method: "DELETE" });
 
 // Furniture
+<<<<<<< HEAD
 export const getFurniture = () => authFetch("/furniture");
 export const createFurniture = (data: Omit<Furniture, "id_mueble">) =>
   authFetch("/furniture", {
     method: "POST",
+=======
+export const getFurniture = () => authFetch('/furniture');
+export const createFurniture = (data: Omit<Furniture, 'id_mueble'| 'id_proveedor'>) =>
+  authFetch('/furniture', {
+    method: 'POST',
+>>>>>>> 2595868cfd595ff4975031e440712f09dc0b9c66
     body: JSON.stringify(data),
   });
 export const updateFurniture = (id: number, data: Partial<Furniture>) =>

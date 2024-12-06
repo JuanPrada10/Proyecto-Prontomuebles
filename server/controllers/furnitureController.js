@@ -30,12 +30,12 @@ export const getFurnitureById = async (req, res) => {
 };
 
 export const createFurniture = async (req, res) => {
-  const { tipo_mueble, material, dimensiones, color, precio, id_proveedor } = req.body;
+  const { tipo_mueble, material, color, precio, id_proveedor, alto, ancho, profundidad } = req.body;
   
   try {
     const result = await pool.query(
-      'INSERT INTO mueble (tipo_mueble, material, dimensiones, color, precio, id_proveedor) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [tipo_mueble, material, dimensiones, color, precio, id_proveedor]
+      'INSERT INTO mueble (tipo_mueble, material, color, precio, id_proveedor, alto, ancho, profundidad) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [tipo_mueble, material, color, precio, id_proveedor, alto, ancho, profundidad]
     );
     
     res.status(201).json(result.rows[0]);
@@ -47,12 +47,12 @@ export const createFurniture = async (req, res) => {
 
 export const updateFurniture = async (req, res) => {
   const { id } = req.params;
-  const { tipo_mueble, material, dimensiones, color, precio, id_proveedor } = req.body;
+  const { tipo_mueble, material, color, precio, id_proveedor, alto, ancho, profundidad } = req.body;
   
   try {
     const result = await pool.query(
-      'UPDATE mueble SET tipo_mueble = $1, material = $2, dimensiones = $3, color = $4, precio = $5, id_proveedor = $6 WHERE id_mueble = $7 RETURNING *',
-      [tipo_mueble, material, dimensiones, color, precio, id_proveedor, id]
+      'UPDATE mueble SET tipo_mueble = $1, material = $2, color = $3, precio = $4, id_proveedor = $5, alto = $6, ancho = $7, profundidad = $8 WHERE id_mueble = $9 RETURNING *',
+      [tipo_mueble, material, color, precio, id_proveedor, alto, ancho, profundidad, id]
     );
     
     if (result.rows.length === 0) {
