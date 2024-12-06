@@ -71,7 +71,7 @@ export const deleteProvider = (id: number) =>
 
 // Furniture
 export const getFurniture = () => authFetch('/furniture');
-export const createFurniture = (data: Omit<Furniture, 'id_mueble'>) =>
+export const createFurniture = (data: Omit<Furniture, 'id_mueble'| 'id_proveedor'>) =>
   authFetch('/furniture', {
     method: 'POST',
     body: JSON.stringify(data),
