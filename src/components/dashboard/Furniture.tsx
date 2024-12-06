@@ -40,8 +40,12 @@ export default function Furniture() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log(formData);
       if (editingFurniture) {
+        const negativo = formData.precio;
+        if (negativo < 0) {
+          return setError("Numero Negativo");
+        }
+
         await api.updateFurniture(editingFurniture.id_mueble, formData);
       } else {
         await api.createFurniture(formData);
@@ -262,6 +266,7 @@ export default function Furniture() {
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Alto"
                   required
+                  min={0}
                 />
               </div>
               <div>
@@ -273,6 +278,7 @@ export default function Furniture() {
                   placeholder="Ancho"
                   value={formData.ancho ? formData.ancho : ""}
                   required
+                  min={0}
                 />
               </div>
 
@@ -285,6 +291,7 @@ export default function Furniture() {
                   placeholder="Profundidad"
                   value={formData.profundidad ? formData.profundidad : ""}
                   required
+                  min={0}
                 />
               </div>
 
@@ -315,6 +322,7 @@ export default function Furniture() {
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   value={formData.precio ? formData.precio : ""}
                   required
+                  min={0}
                 />
               </div>
 
