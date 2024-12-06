@@ -1,7 +1,7 @@
 export interface User {
   id_usuario: number;
   username: string;
-  role: 'admin' | 'seller';
+  role: "admin" | "seller";
   id_vendedor?: number;
 }
 
@@ -17,11 +17,9 @@ export interface Furniture {
   id_mueble: number;
   tipo_mueble: string;
   material: string;
-  dimensiones: {
-    alto: number;
-    ancho: number;
-    profundidad: number;
-  };
+  alto: number;
+  ancho: number;
+  profundidad: number;
   color: string;
   precio: number;
   id_proveedor: number;

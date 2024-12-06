@@ -9,7 +9,6 @@ import Reports from "./dashboard/Reports";
 
 export default function Dashboard() {
   const logout = useAuthStore((state) => state.logout);
-  const role = useAuthStore((state) => state?.user?.role || "seller");
 
   return (
     <Router>
@@ -17,21 +16,12 @@ export default function Dashboard() {
         <Sidebar onLogout={logout} />
         <main className="flex-1 p-8">
           <Routes>
-            <Route
-              path="/providers"
-              element={
-                role === "admin" ? (
-                  <Providers />
-                ) : (
-                  <h1>No tienes permisos perra</h1>
-                )
-              }
-            />
+            <Route path="/providers" element={<Providers />} />
             <Route path="/furniture" element={<Furniture />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path="*" element={<h1>RUTA NO ENCONTRADA</h1>} />{" "}
+            <Route path="*" element={<Providers />} />{" "}
           </Routes>
         </main>
       </div>

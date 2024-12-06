@@ -21,9 +21,9 @@ export default function Sidebar({ onLogout }: SidebarProps) {
     { id: "reports", icon: BarChart2, label: "Reportes" },
   ];
   const adminMenuItems = [
-    ...commonMenuItems,
     { id: "providers", icon: Package, label: "Proveedores" },
     { id: "furniture", icon: Sofa, label: "Muebles" },
+    ...commonMenuItems,
   ];
   const menuItemsByRole = {
     admin: adminMenuItems,
