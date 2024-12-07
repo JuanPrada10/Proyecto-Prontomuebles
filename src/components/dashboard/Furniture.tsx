@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, X } from "lucide-react";
-import type { Furniture } from "../../types";
+import type { Furniture, Provider } from "../../types";
 import * as api from "../../services/api";
 export default function Furniture() {
   const [furniture, setFurniture] = useState<Furniture[]>([]);
+  const [providers, setProviders] = useState<Provider[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingFurniture, setEditingFurniture] = useState<Furniture | null>(
     null
@@ -26,15 +27,23 @@ export default function Furniture() {
 
   const fetchFurniture = async () => {
     try {
-      const data = await api.getFurniture();
-      setFurniture(data);
+      const [furnitureData, providersData] = await Promise.all([
+        api.getFurniture(),
+        api.getProviders(), // Asegúrate de tener una función API para obtener proveedores
+      ]);
+      setFurniture(furnitureData);
+      setProviders(providersData);
       setError(null);
     } catch (err) {
-      setError("Failed to fetch furniture");
-      console.error("Error fetching furniture:", err);
+      setError("Failed to fetch furniture or providers");
+      console.error("Error fetching data:", err);
     } finally {
       setLoading(false);
     }
+  };
+  const getProviderName = (id_proveedor: number) => {
+    const provider = providers.find((p) => p.id_proveedor === id_proveedor);
+    return provider ? provider.nombre : "Proveedor desconocido";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -185,6 +194,10 @@ export default function Furniture() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {furniture.precio}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {" "}
+                  {getProviderName(furniture.id_proveedor)}{" "}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
