@@ -33,7 +33,7 @@ export interface Customer {
   direccion: string;
 }
 
-export interface Seller {
+export interface Employee {
   id_vendedor: number;
   nombre: string;
   telefono: string;

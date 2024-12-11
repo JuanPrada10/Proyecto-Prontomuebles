@@ -1,4 +1,4 @@
-import { Provider, Furniture, Customer, Sale } from "../types";
+import { Provider, Furniture, Customer, Sale, Employee } from "../types";
 
 const API_URL = "http://localhost:5000/api";
 
@@ -109,8 +109,21 @@ export const createSale = (data: Omit<Sale, "id_venta" | "fecha" | "total">) =>
     body: JSON.stringify(data),
   });
 export const getSaleById = (id: number) => authFetch(`/sales/${id}`);
-// Sellers
-export const getSellers = () => authFetch("/sellers");
+// Employee
+export const getEmployees = () => authFetch("/employee");
+export const createEmployee = (data: Omit<Employee, "id_vendedor">) =>
+  authFetch("/employee", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+export const updateEmployee = (id: number, data: Partial<Employee>) =>
+  authFetch(`/employee/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+export const deleteEmployee = (id: number) =>
+  authFetch(`/employee/${id}`, { method: "DELETE" });
+
 // Reports
 export const getMonthlySales = () => authFetch("/reports/monthly-sales");
 export const getTopProducts = () => authFetch("/reports/top-products");

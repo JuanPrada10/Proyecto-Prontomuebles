@@ -6,6 +6,7 @@ import {
   ShoppingCart,
   BarChart2,
   LogOut,
+  Briefcase,
 } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 
@@ -19,10 +20,11 @@ export default function Sidebar({ onLogout }: SidebarProps) {
     { id: "customers", icon: Users, label: "Clientes" },
     { id: "sales", icon: ShoppingCart, label: "Ventas" },
     { id: "reports", icon: BarChart2, label: "Reportes" },
+    {id: "employee", icon: Briefcase, label: "Empleados"},
   ];
   const adminMenuItems = [
     { id: "providers", icon: Package, label: "Proveedores" },
-    { id: "furniture", icon: Sofa, label: "Muebles" },
+    { id: "furniture", icon: Sofa, label: "Muebles" },    
     ...commonMenuItems,
   ];
   const menuItemsByRole = {
