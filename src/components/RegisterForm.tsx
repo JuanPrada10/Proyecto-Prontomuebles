@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, Lock, Mail, PersonStanding, User } from "lucide-react";
+import { Eye, EyeOff, Lock, PersonStanding, User } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 
 interface RegisterFormProps {

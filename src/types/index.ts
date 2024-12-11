@@ -45,7 +45,6 @@ export interface Sale {
   total: number;
   id_cliente: number;
   id_vendedor: number;
-  detalles: SaleDetail[];
 }
 
 export interface SaleDetail {

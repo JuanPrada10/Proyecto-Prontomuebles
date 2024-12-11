@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, X } from "lucide-react";
 import type { Furniture, Provider } from "../../types";
 import * as api from "../../services/api";
+
 export default function Furniture() {
   const [furniture, setFurniture] = useState<Furniture[]>([]);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("0");
   const [editingFurniture, setEditingFurniture] = useState<Furniture | null>(
     null
   );
@@ -19,8 +21,13 @@ export default function Furniture() {
     profundidad: 0,
     color: "",
     precio: 0,
+    id_proveedor: 0,
   });
-
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+  });
   useEffect(() => {
     fetchFurniture();
   }, []);
@@ -70,6 +77,7 @@ export default function Furniture() {
         profundidad: 0,
         color: "",
         precio: 0,
+        id_proveedor: 0,
       });
       fetchFurniture();
     } catch (err) {
@@ -92,8 +100,14 @@ export default function Furniture() {
       profundidad: furniture.profundidad,
       color: furniture.color,
       precio: furniture.precio,
+      id_proveedor: 0,
     });
     setIsModalOpen(true);
+  };
+  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setSelectedOption(e.target.value);
   };
 
   const handleDelete = async (id: number) => {
@@ -139,6 +153,7 @@ export default function Furniture() {
               profundidad: 0,
               color: "",
               precio: 0,
+              id_proveedor: 0,
             });
             setIsModalOpen(true);
           }}
@@ -157,6 +172,9 @@ export default function Furniture() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Proveedor
+              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Tipo
               </th>
@@ -181,6 +199,10 @@ export default function Furniture() {
             {furniture.map((furniture) => (
               <tr key={furniture.id_mueble}>
                 <td className="px-6 py-4 whitespace-nowrap">
+                  {" "}
+                  {getProviderName(furniture.id_proveedor)}{" "}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   {furniture.tipo_mueble}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -193,12 +215,9 @@ export default function Furniture() {
                   {furniture.color}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {furniture.precio}
+                  {formatter.format(furniture.precio)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {" "}
-                  {getProviderName(furniture.id_proveedor)}{" "}
-                </td>
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
                     <button
@@ -239,6 +258,29 @@ export default function Furniture() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
+                  Proveedor
+                </label>
+                <select
+                  name="id_proveedor"
+                  value={selectedOption}
+                  onChange={handleChangeSelect}
+                  className="block w-full pl-3  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
+                >
+                  <option value="0" disabled className="text-gray-300">
+                    Seleccione una opción
+                  </option>
+                  {providers.map((provider) => (
+                    <option
+                      key={provider.id_proveedor}
+                      value={provider.id_proveedor}
+                    >
+                      {provider.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
                   Tipo de mueble
                 </label>
                 <input
@@ -247,7 +289,7 @@ export default function Furniture() {
                   placeholder="Tipo de mueble"
                   value={formData.tipo_mueble}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   required
                 />
               </div>
@@ -262,7 +304,7 @@ export default function Furniture() {
                   placeholder="Material"
                   value={formData.material}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   required
                 />
               </div>
@@ -276,7 +318,7 @@ export default function Furniture() {
                   name="alto"
                   value={formData.alto ? formData.alto : ""}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   placeholder="Alto"
                   required
                   min={0}
@@ -287,7 +329,7 @@ export default function Furniture() {
                   type="number"
                   name="ancho"
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   placeholder="Ancho"
                   value={formData.ancho ? formData.ancho : ""}
                   required
@@ -300,7 +342,7 @@ export default function Furniture() {
                   type="number"
                   name="profundidad"
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   placeholder="Profundidad"
                   value={formData.profundidad ? formData.profundidad : ""}
                   required
@@ -318,7 +360,7 @@ export default function Furniture() {
                   placeholder="Color"
                   onChange={handleChange}
                   value={formData.color}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   required
                 />
               </div>
@@ -332,7 +374,7 @@ export default function Furniture() {
                   name="precio"
                   placeholder="Precio"
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full pl-5  py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
                   value={formData.precio ? formData.precio : ""}
                   required
                   min={0}
