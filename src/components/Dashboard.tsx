@@ -6,7 +6,8 @@ import Furniture from "./dashboard/Furniture";
 import Customers from "./dashboard/Customers";
 import Sales from "./dashboard/Sales";
 import Reports from "./dashboard/Reports";
-import Employees from "./dashboard/employee";
+import Employees from "./dashboard/Employee";
+import User from "./dashboard/User";
 
 export default function Dashboard() {
   const logout = useAuthStore((state) => state.logout);
@@ -23,6 +24,7 @@ export default function Dashboard() {
             <Route path="/sales" element={<Sales />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/employee" element={<Employees />} />
+            <Route path="/user" element={<User />} />
             <Route path="*" element={<Providers />} />{" "}
           </Routes>
         </main>

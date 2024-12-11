@@ -7,6 +7,8 @@ import {
   BarChart2,
   LogOut,
   Briefcase,
+  User,
+
 } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 
@@ -24,7 +26,8 @@ export default function Sidebar({ onLogout }: SidebarProps) {
   ];
   const adminMenuItems = [
     { id: "providers", icon: Package, label: "Proveedores" },
-    { id: "furniture", icon: Sofa, label: "Muebles" },    
+    { id: "furniture", icon: Sofa, label: "Muebles" },
+    { id: "user", icon: User, label: "Usuarios" },
     ...commonMenuItems,
   ];
   const menuItemsByRole = {
