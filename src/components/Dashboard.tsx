@@ -25,7 +25,6 @@ export default function Dashboard() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/employee" element={<Employees />} />
             <Route path="/user" element={<User />} />
-            <Route path="*" element={<Providers />} />{" "}
           </Routes>
         </main>
       </div>

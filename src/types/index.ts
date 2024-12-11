@@ -1,7 +1,7 @@
 export interface User {
   id_usuario: number;
   username: string;
-  role: "admin" | "seller";
+  role: string;
   id_vendedor?: number;
 }
 
