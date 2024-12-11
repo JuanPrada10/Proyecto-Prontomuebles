@@ -48,10 +48,11 @@ const authFetch = async (endpoint: string, options: RequestInit = {}) => {
   });
 
   if (!response.ok) {
-    throw new Error("API request failed");
+    const errorText = await response.text();
+    throw new Error(`API request failed: ${errorText}`);
   }
-
-  return response.json();
+  const text = await response.text();
+  return text ? JSON.parse(text) : null;
 };
 
 // Providers
