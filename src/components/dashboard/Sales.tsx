@@ -1,11 +1,12 @@
 import { Plus, Eye, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import type { Customer, Sale } from "../../types";
+import type { Customer, Sale, Employee } from "../../types";
 import { format } from "date-fns";
 import * as api from "../../services/api";
 
 export default function Sales() {
   const [sales, setSales] = useState<Sale[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -27,12 +28,14 @@ export default function Sales() {
   }, []);
   const fetchSale = async () => {
     try {
-      const [salesData, customersData] = await Promise.all([
+      const [salesData, customersData, employeesData] = await Promise.all([
         api.getSales(),
         api.getCustomers(),
+        api.getEmployees(),
       ]);
       setSales(salesData);
       setCustomers(customersData);
+      setEmployees(employeesData);
       setError(null);
     } catch (err) {
       setError("Failed to fetch customer or sales data");
@@ -44,6 +47,10 @@ export default function Sales() {
   const getCustomerName = (id_cliente: number) => {
     const customer = customers.find((c) => c.id_cliente === id_cliente);
     return customer ? customer.nombre : "Proveedor desconocido";
+  };
+  const getEmployerName = (id_vendedor: number) => {
+    const employer = employees.find((e) => e.id_vendedor === id_vendedor);
+    return employer ? employer.nombre : "Proveedor desconocido";
   };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -133,7 +140,7 @@ export default function Sales() {
               <tr key={sale.id_venta}>
                 <td className="px-6 py-4 whitespace-nowrap">{sale.id_venta}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {sale.id_vendedor}
+                  {getEmployerName(sale.id_vendedor)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {format(new Date(sale.fecha), "MMM dd, yyyy")}
@@ -177,7 +184,7 @@ export default function Sales() {
                   Cliente
                 </label>
                 <select
-                  name="id_Cliente"
+                  name="id_cliente"
                   id="cliente"
                   value={selectedOption}
                   onChange={handleChangeSelect}
@@ -210,7 +217,11 @@ export default function Sales() {
                   <option value="0" disabled className="text-gray-300">
                     Seleccione una opción
                   </option>
-                  <option value="1">Administrador</option>
+                  {employees.map((employ) => (
+                    <option key={employ.id_vendedor} value={employ.id_vendedor}>
+                      {employ.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>

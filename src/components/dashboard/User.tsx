@@ -115,14 +115,16 @@ export default function User() {
             {users.map((user) => (
               <tr key={user.id_usuario}>
                 <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {user.role === "admin" ? "Administrador" : "Vendedor"}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex item-center gap-2">
                     <button
                       onClick={() => handleEdit(user)}
                       className="text-blue-600 hover:text-blue-800"
                     >
-                      <Edit2 className="h-5 w-5" />
+                      <Edit2 className="h-5 w-5 mr-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(user.id_usuario)}

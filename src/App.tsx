@@ -11,6 +11,8 @@ export default function App() {
 
   if (token) {
     return <Dashboard />;
+  } else {
+    <LoginForm onSwitchToRegister={() => setIsLogin(false)} />;
   }
 
   return (
