@@ -68,7 +68,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
             name="username"
             value={formData.username}
             onChange={handleChange}
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
             placeholder="username"
             disabled={loading}
           />
@@ -92,7 +92,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
             placeholder="••••••••"
             disabled={loading}
           />
@@ -127,7 +127,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
             placeholder="••••••••"
             disabled={loading}
           />
@@ -147,7 +147,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
           name="role"
           id="role"
           onChange={handleChangeSelect}
-          className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
+          className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent text-gray-500"
         >
           <option value="admin">Administrador</option>
           <option value="seller">Vendedor</option>
@@ -160,7 +160,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
           <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -174,7 +174,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
         <button
           type="button"
           onClick={onSwitchToLogin}
-          className="font-medium text-blue-600 hover:text-blue-500"
+          className="font-medium text-blue-900 hover:text-blue-700"
         >
           Acceder
         </button>

@@ -114,7 +114,7 @@ export default function Providers() {
             });
             setIsModalOpen(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
+          className="bg-blue-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
         >
           <Plus className="h-5 w-5" />
           Añadir Proveedor
@@ -125,30 +125,33 @@ export default function Providers() {
         <div className="bg-red-50 text-red-500 p-4 rounded-lg">{error}</div>
       )}
 
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-900">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-900 dark:text-gray-400">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Nombre
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Direccion
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 telefono
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Persona de Contacto
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Acciones
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {providers.map((provider) => (
-              <tr key={provider.id_proveedor}>
+              <tr
+                key={provider.id_proveedor}
+                className=" even:bg-white odd:bg-gray-200 border-b border-blue-900"
+              >
                 <td className="px-6 py-4 whitespace-nowrap">
                   {provider.nombre}
                 </td>
@@ -208,7 +211,7 @@ export default function Providers() {
                   name="nombre"
                   value={formData.nombre}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900"
                   required
                 />
               </div>
@@ -221,7 +224,7 @@ export default function Providers() {
                   name="direccion"
                   value={formData.direccion}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900"
                   required
                 />
               </div>
@@ -235,7 +238,7 @@ export default function Providers() {
                   name="telefono"
                   value={formData.telefono}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900"
                   required
                 />
               </div>
@@ -249,7 +252,7 @@ export default function Providers() {
                   name="persona_contacto"
                   value={formData.persona_contacto}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900"
                   required
                 />
               </div>
@@ -264,7 +267,7 @@ export default function Providers() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-900 hover:bg-blue-700 rounded-md"
                 >
                   {editingProvider ? "Update" : "Create"}
                 </button>

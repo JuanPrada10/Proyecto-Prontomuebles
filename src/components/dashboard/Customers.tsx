@@ -16,7 +16,6 @@ export default function Customers() {
     direccion: "",
   });
 
-
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -34,7 +33,7 @@ export default function Customers() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) =>{
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (editingCustomer) {
@@ -54,8 +53,8 @@ export default function Customers() {
     } catch (err) {
       setError(
         editingCustomer
-        ? "Failed to update customer"
-        : "Failed to create customer"
+          ? "Failed to update customer"
+          : "Failed to create customer"
       );
       console.error("Error submitting form:", err);
     }
@@ -75,10 +74,10 @@ export default function Customers() {
   const handleDelete = async (id: number) => {
     if (!window.confirm("Are you sure you want to delete this customer?"))
       return;
-    try{
+    try {
       await api.deleteCustomer(id);
       fetchCustomers();
-    }catch (err){
+    } catch (err) {
       setError("Failed to delete customer");
       console.error("Error deleting customer:", err);
     }
@@ -88,13 +87,13 @@ export default function Customers() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -114,7 +113,7 @@ export default function Customers() {
             });
             setIsModalOpen(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
+          className="bg-blue-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
         >
           <Plus className="h-5 w-5" />
           Añadir Cliente
@@ -125,33 +124,36 @@ export default function Customers() {
         <div className="bg-red-50 text-red-500 p-4 rounded-lg">{error}</div>
       )}
 
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="relative  w-auto overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-900">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-900 dark:text-gray-400">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Nombre
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Telefono
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Correo
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Direccion
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Acciones
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {customers.map((customer) => (
-              <tr key={customer.id_cliente}>
+              <tr
+                key={customer.id_cliente}
+                className=" even:bg-white odd:bg-gray-200 border-b border-blue-900"
+              >
                 <td className="px-6 py-4 whitespace-nowrap">
                   {customer.nombre}
-                  </td>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {customer.telefono}
                 </td>
@@ -164,16 +166,16 @@ export default function Customers() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex item-center gap-2">
                     <button
-                    onClick={() => handleEdit(customer)}
-                    className="text-blue-600 hover:text-blue-800"
+                      onClick={() => handleEdit(customer)}
+                      className="text-blue-600 hover:text-blue-800"
                     >
                       <Edit2 className="h-5 w-5" />
                     </button>
                     <button
-                      onClick={()=> handleDelete(customer.id_cliente)}
+                      onClick={() => handleDelete(customer.id_cliente)}
                       className="text-red-600 hover:text-red-800"
-                      >
-                        <Trash2 className="h-5 w-5" />
+                    >
+                      <Trash2 className="h-5 w-5" />
                     </button>
                   </div>
                 </td>
@@ -212,7 +214,7 @@ export default function Customers() {
                   required
                 />
               </div>
-          
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Phone
@@ -226,8 +228,8 @@ export default function Customers() {
                   required
                 />
               </div>
-        
-            <div>
+
+              <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Email
                 </label>
@@ -238,10 +240,10 @@ export default function Customers() {
                   onChange={handleChange}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
-              />
-            </div>
+                />
+              </div>
 
-            <div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Address
                 </label>
@@ -252,27 +254,27 @@ export default function Customers() {
                   onChange={handleChange}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
-              />
-            </div>
+                />
+              </div>
 
-            <div className="flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
                 >
                   Cancel
-                  </button>
-                  <button
+                </button>
+                <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
                 >
                   {editingCustomer ? "Update" : "Create"}
                 </button>
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
       )}
     </div>
   );

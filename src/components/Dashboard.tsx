@@ -15,7 +15,7 @@ export default function Dashboard() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100 flex">
+      <div className="min-h-screen bg-slate-300 flex">
         <Sidebar onLogout={logout} />
         <main className="flex-1 p-8">
           <Routes>

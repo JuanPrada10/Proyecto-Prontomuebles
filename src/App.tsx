@@ -16,7 +16,12 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4">
+    <div
+      className="min-h-screen  bg-gradient-to-bl
+from-[#0f172a]
+via-[#1e1a78]
+to-[#0f172a] flex flex-col items-center justify-center p-4"
+    >
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">
