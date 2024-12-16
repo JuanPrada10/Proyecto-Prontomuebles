@@ -1,9 +1,9 @@
 import express from "express";
 import {
   getMonthlySales,
-  getTopSellingProducts,
-  getTopCustomers,
-  getSellerPerformance,
+  // getTopSellingProducts,
+  // getTopCustomers,
+  // getSellerPerformance,
   getTotalSalesCount,
   getTotalFurnitureCount,
   getTotalRevenue,
