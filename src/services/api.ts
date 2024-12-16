@@ -146,8 +146,30 @@ export const getUserbyId = (id: number) => authFetch(`/user/${id}`);
 export const getMonthlySales = () => authFetch("/reports/monthly-sales");
 export const getTopProducts = () => authFetch("/reports/top-products");
 export const getTopCustomers = () => authFetch("/reports/top-customers");
-export const getSellerPerformance = () =>
-  authFetch("/reports/seller-performance");
+export const getSellerPerformance = () =>  authFetch("/reports/seller-performance");
+//Obtener el total de ventas
+export const getTotalSalesCount = async () => {
+  const response = await fetch ("/reports/total-sales-count");
+  const data = await response.json();
+  return data.totalSalesCount;
+};
+
+// Obtener el total de muebles
+export const getTotalFurnitureCount = async () => {
+  const response = await fetch("/reports/total-furniture-count");
+  const data = await response.json();
+  return data.totalFurniture;
+};
+
+// Obtener el total de ingresos totales
+
+export const getTotalRevenue = async () => {
+  const response = await fetch("/reports/total-revenue");
+  const data = await response.json();
+  return data.totalRevenue;
+};
+
+/*
 // Obtener el total de ventas
 export async function getTotalSalesCount() {
   const response = await fetch("/api/sales/total-count");
@@ -163,8 +185,8 @@ export async function getTotalFurnitureCount() {
 }
 
 // Obtener los ingresos totales
-export async function getTotalRevenue() {
-  const response = await fetch("/api/sales/total-revenue");
-  if (!response.ok) throw new Error("Error fetching total revenue");
-  return (await response.json()).total_revenue; // Cambia a total_revenue según lo que devuelve el backend
-}
+export const getTotalRevenue = async () => {
+  const response = await fetch("/reports/total-revenue");
+  const data = await response.json();
+  return data.totalRevenue;
+};*/

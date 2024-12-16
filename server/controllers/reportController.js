@@ -84,7 +84,7 @@ export const getTotalSalesCount = async (req, res) => {
     const result = await pool.query(
       `SELECT COUNT(*) AS total_sales FROM venta`
     );
-    res.json(result.rows[0]);
+    res.json(result.rows[0].);
   } catch (error) {
     console.error("Error fetching total sales count:", error);
     res.status(500).json({ message: "Server error" });

@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import * as api from "../../services/api";
+import { format } from "date-fns"; // Asegúrate de tener instalada esta dependencia
 
 ChartJS.register(
   CategoryScale,
@@ -61,7 +62,7 @@ export default function Reports() {
       },
       title: {
         display: true,
-        text: "Monthly Sales Report",
+        text: "Reporte mensual de ventas",
       },
     },
   };
@@ -89,17 +90,17 @@ export default function Reports() {
   useEffect(() => {
     async function fetchSalesData() {
       try {
-        const response: MonthlySales[] = await api.getMonthlySales(); // Asegúrate de que la API devuelva datos en este formato
-        const labels = response.map((item) => item.month); // Asignar el valor de 'month' como string
+        const response: MonthlySales[] = await api.getMonthlySales();
+        const labels = response.map((item) => format(new Date(item.month), "MMMM yyyy"));
         const data = response.map((item) => item.total_sales);
 
         setSalesData({
           labels,
           datasets: [
             {
-              label: "Monthly Sales",
+              label: "Ventas Mensuales",
               data,
-              backgroundColor: "rgba(59, 130, 246, 0.5)",
+              backgroundColor: "rgba(64, 133, 245, 0.5)",
             },
           ],
         });
@@ -110,6 +111,12 @@ export default function Reports() {
 
     fetchSalesData();
   }, []);
+
+  // Formatear el totalRevenue en COP
+  const formatter = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+  });
 
   return (
     <div className="space-y-6">
@@ -125,14 +132,12 @@ export default function Reports() {
             </li>
             <li className="flex justify-between items-center">
               <span>Total Furniture:</span>
-              <span className="font-semibold">
-                {summaryData.totalFurniture}
-              </span>
+              <span className="font-semibold">{summaryData.totalFurniture}</span>
             </li>
             <li className="flex justify-between items-center">
               <span>Total Revenue:</span>
               <span className="font-semibold">
-                ${summaryData.totalRevenue.toFixed(2)}
+                {formatter.format(summaryData.totalRevenue)}
               </span>
             </li>
           </ul>
@@ -140,7 +145,7 @@ export default function Reports() {
 
         {/* Gráfico */}
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Sales Overview</h3>
+          <h3 className="text-lg font-semibold mb-4">Grafico de ventas</h3>
           <Bar options={options} data={salesData} />
         </div>
       </div>
