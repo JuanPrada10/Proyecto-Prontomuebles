@@ -29,13 +29,13 @@ export default function Sidebar({ onLogout }: SidebarProps) {
   const commonMenuItems: MenuItem[] = [
     { id: "customers", icon: Users, label: "Clientes" },
     { id: "sales", icon: ShoppingCart, label: "Ventas" },
-    { id: "reports", icon: BarChart2, label: "Reportes" },
     { id: "employee", icon: Briefcase, label: "Empleados" },
   ];
   const adminMenuItems: MenuItem[] = [
     { id: "providers", icon: Package, label: "Proveedores" },
     { id: "furniture", icon: Sofa, label: "Muebles" },
     { id: "user", icon: User, label: "Usuarios" },
+    { id: "reports", icon: BarChart2, label: "Reportes" },
     ...commonMenuItems,
   ];
   const menuItemsByRole: MenuItemsByRole = {
