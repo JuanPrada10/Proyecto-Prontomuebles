@@ -102,11 +102,6 @@ export default function Reports() {
           totalFurniture,
           totalRevenue: totalRev,
         });
-        setSummaryData({
-          totalSales: totalSalesCount.total_sales,
-          totalFurniture: totalFurnitureCount.total_furniture,
-          totalRevenue: totalRevenue.total_revenue,
-        });
         // Esto te mostrará lo que realmente estás recibiendo.
       } catch (error) {
         console.error("Error fetching summary data:", error);
