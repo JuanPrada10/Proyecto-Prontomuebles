@@ -40,6 +40,7 @@ export default function Furniture() {
       ]);
       setFurniture(furnitureData);
       setProviders(providersData);
+      setSelectedOption('0');
       setError(null);
     } catch (err) {
       setError("Failed to fetch furniture or providers");
