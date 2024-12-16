@@ -82,6 +82,26 @@ export default function Reports() {
           totalFurnitureCount,
           totalRevenue
         );
+        const totalSales =
+          Array.isArray(totalSalesCount) && totalSalesCount.length > 0
+            ? totalSalesCount[0].total_sales
+            : totalSalesCount?.total_sales || 0;
+
+        const totalFurniture =
+          Array.isArray(totalFurnitureCount) && totalFurnitureCount.length > 0
+            ? totalFurnitureCount[0].total_furniture
+            : totalFurnitureCount?.total_furniture || 0;
+
+        const totalRev =
+          Array.isArray(totalRevenue) && totalRevenue.length > 0
+            ? totalRevenue[0].total_revenue
+            : totalRevenue?.total_revenue || 0;
+
+        setSummaryData({
+          totalSales,
+          totalFurniture,
+          totalRevenue: totalRev,
+        });
         setSummaryData({
           totalSales: totalSalesCount.total_sales,
           totalFurniture: totalFurnitureCount.total_furniture,
@@ -131,7 +151,7 @@ export default function Reports() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Reporte</h2>
+      <h2 className="text-2xl font-bold text-gray-800">Reports</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Resumen */}
         <div className="bg-white p-6 rounded-lg shadow-md">
