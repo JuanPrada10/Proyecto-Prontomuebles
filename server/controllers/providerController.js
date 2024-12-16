@@ -74,15 +74,11 @@ export const deleteProvider = async (req, res) => {
 
   try {
     const result = await pool.query(
-      "DELETE FROM mueble WHERE id_proveedor = $1 RETURNING *",
-      [id]
-    );
-    const result1 = await pool.query(
-      "DELETE FROM proveedor WHERE id_proveedor = 1$ RETURNING *",
+      "DELETE FROM proveedor WHERE id_proveedor = $1 RETURNING *",
       [id]
     );
 
-    if (result.rows.length === 0 || result1.rows.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: "Provider not found" });
     }
 
