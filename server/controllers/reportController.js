@@ -1,4 +1,4 @@
-import pool from '../config/db.js';
+import pool from "../config/db.js";
 
 export const getMonthlySales = async (req, res) => {
   try {
@@ -14,8 +14,8 @@ export const getMonthlySales = async (req, res) => {
     `);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching monthly sales:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error fetching monthly sales:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -35,8 +35,8 @@ export const getTopSellingProducts = async (req, res) => {
     `);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching top selling products:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error fetching top selling products:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -55,8 +55,8 @@ export const getTopCustomers = async (req, res) => {
     `);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching top customers:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error fetching top customers:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -75,7 +75,42 @@ export const getSellerPerformance = async (req, res) => {
     `);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching seller performance:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error fetching seller performance:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+export const getTotalSalesCount = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT COUNT(*) AS total_sales FROM venta`
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching total sales count:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getTotalFurnitureCount = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT COUNT(*) AS total_furniture FROM mueble`
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching total furniture count:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getTotalRevenue = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT SUM(total) AS total_revenue FROM venta`
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching total revenue:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
