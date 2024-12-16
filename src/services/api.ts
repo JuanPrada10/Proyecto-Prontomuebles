@@ -144,30 +144,30 @@ export const getUserbyId = (id: number) => authFetch(`/user/${id}`);
 
 // Reports
 export const getMonthlySales = () => authFetch("/reports/monthly-sales");
-export const getTopProducts = () => authFetch("/reports/top-products");
-export const getTopCustomers = () => authFetch("/reports/top-customers");
-export const getSellerPerformance = () =>  authFetch("/reports/seller-performance");
+export const getTotalSalesCount = () => authFetch("/reports/total-sales-count");
+export const getTotalFurnitureCount = () =>
+  authFetch("/reports/total-furniture-count");
+export const getTotalRevenue = () => authFetch("/reports/total-revenue");
 //Obtener el total de ventas
-export const getTotalSalesCount = async () => {
-  const response = await fetch ("/reports/total-sales-count");
-  const data = await response.json();
-  return data.totalSalesCount;
-};
-
+// export const getTotalSalesCount = async () => {
+//   const response = await fetch("`${API_URL}/reports/total-sales-count");
+//   const data = await response.json();
+//   return data.totalSalesCount;
+// };
 // Obtener el total de muebles
-export const getTotalFurnitureCount = async () => {
-  const response = await fetch("/reports/total-furniture-count");
-  const data = await response.json();
-  return data.totalFurniture;
-};
+// export const getTotalFurnitureCount = async () => {
+//   const response = await fetch("`${API_URL}/reports/total-furniture-count");
+//   const data = await response.json();
+//   return data.totalFurniture;
+// };
 
 // Obtener el total de ingresos totales
 
-export const getTotalRevenue = async () => {
-  const response = await fetch("/reports/total-revenue");
-  const data = await response.json();
-  return data.totalRevenue;
-};
+// export const getTotalRevenue = async () => {
+//   const response = await fetch("`${API_URL}/reports/total-revenue");
+//   const data = await response.json();
+//   return data.totalRevenue;
+// };
 
 /*
 // Obtener el total de ventas

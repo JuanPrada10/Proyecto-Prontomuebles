@@ -70,15 +70,24 @@ export default function Reports() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const totalSalesCount = await api.getTotalSalesCount();
-        const totalFurnitureCount = await api.getTotalFurnitureCount();
-        const totalRevenue = await api.getTotalRevenue();
-
+        const [totalSalesCount, totalFurnitureCount, totalRevenue] =
+          await Promise.all([
+            api.getTotalSalesCount(),
+            api.getTotalFurnitureCount(),
+            api.getTotalRevenue(),
+          ]);
+        console.log(
+          "Resumen recibido:",
+          totalSalesCount,
+          totalFurnitureCount,
+          totalRevenue
+        );
         setSummaryData({
-          totalSales: totalSalesCount,
-          totalFurniture: totalFurnitureCount,
-          totalRevenue: totalRevenue,
+          totalSales: totalSalesCount.total_sales,
+          totalFurniture: totalFurnitureCount.total_furniture,
+          totalRevenue: totalRevenue.total_revenue,
         });
+        // Esto te mostrará lo que realmente estás recibiendo.
       } catch (error) {
         console.error("Error fetching summary data:", error);
       }
@@ -91,7 +100,9 @@ export default function Reports() {
     async function fetchSalesData() {
       try {
         const response: MonthlySales[] = await api.getMonthlySales();
-        const labels = response.map((item) => format(new Date(item.month), "MMMM yyyy"));
+        const labels = response.map((item) =>
+          format(new Date(item.month), "MMMM yyyy")
+        );
         const data = response.map((item) => item.total_sales);
 
         setSalesData({
@@ -113,29 +124,31 @@ export default function Reports() {
   }, []);
 
   // Formatear el totalRevenue en COP
-  const formatter = new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
+  const formatter = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
   });
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Reports</h2>
+      <h2 className="text-2xl font-bold text-gray-800">Reporte</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Resumen */}
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Overview</h3>
+          <h3 className="text-lg font-semibold mb-4">Resumen</h3>
           <ul className="space-y-2">
             <li className="flex justify-between items-center">
-              <span>Total Sales:</span>
+              <span>Ventas Totales:</span>
               <span className="font-semibold">{summaryData.totalSales}</span>
             </li>
             <li className="flex justify-between items-center">
-              <span>Total Furniture:</span>
-              <span className="font-semibold">{summaryData.totalFurniture}</span>
+              <span>Total Muebles:</span>
+              <span className="font-semibold">
+                {summaryData.totalFurniture}
+              </span>
             </li>
             <li className="flex justify-between items-center">
-              <span>Total Revenue:</span>
+              <span>Total Ingresos:</span>
               <span className="font-semibold">
                 {formatter.format(summaryData.totalRevenue)}
               </span>
