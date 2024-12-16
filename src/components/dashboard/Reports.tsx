@@ -34,7 +34,6 @@ export default function Reports() {
     totalRevenue: 0.0,
   });
 
-  // Cambié el tipo de salesData para especificar que labels es un array de strings
   const [salesData, setSalesData] = useState<{
     labels: string[];
     datasets: {
